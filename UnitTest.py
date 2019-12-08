@@ -1,15 +1,12 @@
 import unittest
-import MathOperations
+import check
 
 
 class TestStringMethods(unittest.TestCase):
 
-    def test_multiply_function(self):
-        self.assertEqual(0, MathOperations.multiply(10, 0), "Not equal!")
-        self.assertEqual(0, MathOperations.multiply(0, 10), "Not equal!")
-        self.assertEqual(6, MathOperations.multiply(2, 3), "Not equal!")
-
-
+    def test_excel_func(self):
+        self.assertTrue(check.checkAnswer(2,2,"A"),"Not True, check Cube")
+        self.assertFalse(check.checkAnswer(2, 2, "A"), "Not False, check Cube or answer")
 
 
 if __name__ == '__main__':
