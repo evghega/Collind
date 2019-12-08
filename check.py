@@ -16,10 +16,11 @@ def CreateGameID():
     sheet = workbook.active
     size = len(sheet['A'])
     gameid = sheet.cell(size,1).value+1
-    print(sheet.cell(1, size + 1).value)
     sheet.cell(size+1, 1).value = gameid
+    sheet.cell(size + 1, 2).value=0
+    sheet.cell(size + 1, 3).value=0
     workbook.save("check.xlsx")
-
+    return gameid
 
 def answertoDB(answer, gameID):
     workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
