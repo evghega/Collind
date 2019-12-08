@@ -1,4 +1,6 @@
 from builtins import range, str
+
+import openpyxl
 from openpyxl import Workbook
 
 
@@ -16,16 +18,24 @@ def checkAnswer(answer, id , Cube):
 
 
 def answertoDB(answer, gameID):
-    workbook = Workbook("check.xlsx")#getting the database location
+    workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
     sheet = workbook.active
-    max_column = sheet.max_column
-    for i in range(2,max_column+1):
-        if gameID == sheet["A"+str(i)]:
+    temp = 2
+    count = 0
+    while sheet["A"+str(temp)].value != None:
+        count = count+1
+        temp=int(temp)+1
+
+    for i in range(2,count):
+        print(i)
+        if gameID == sheet["A"+str(i)].value:
             if answer == True:
-                sheet["B"+str(i)]=sheet["B"+str(i)]+1
+                sheet["B"+str(i)]=sheet["B"+str(i)].value+1
+                workbook.save("check.xlsx")
                 break
             else:
-                sheet["C" + str(i)] = sheet["C" + str(i)] + 1
+                sheet["C" + str(i)] = sheet["C" + str(i)].value + 1
+                workbook.save("check.xlsx")
                 break
 
-answertoDB(True,4)
+checkAnswer(answer, id , Cube)
