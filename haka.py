@@ -33,7 +33,7 @@ pygame.display.set_caption("My Game")
 
 #functions
 def card(xx,yy):
-    img = pygame.image.load(r'C:\Users\Elad\Desktop\CARD1.png')
+    img = pygame.image.load(r'CARD1.png')
     img = pygame.transform.scale(img,(int(728/3),int(1052/3)))
     screen.blit(img, (xx,yy))
 
