@@ -13,20 +13,15 @@ def checkAnswer(answer, id , Cube):
         return False
 
 def answertoDB(answer, gameID):
-    workbook = Workbook("check.xlsx")
+    workbook = openpyxl.load_workbook("check.xlsx")
     sheet = workbook.active
-    numID = 1
-    num = 2
-    while sheet["A"+str(num)] != None and sheet["A"+str(num)] == numID:
-        numID = numID+1
-        num=num+1
-    sheet["A"+str(num)]=numID
-    if answer == True:
-        sheet["B"+str(num)] = sheet["B"+str(num)]+1
-    else:
-        sheet["C"+str(num)] = sheet["C"+str(num)] + 1
 
+    for row in sheet.iter_rows():
+        for cell in row:
+            print(cell.value)
     workbook.save(filename="check.xlsx")
 
 
 answertoDB(True,4)
+
+
