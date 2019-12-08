@@ -27,7 +27,6 @@ def answertoDB(answer, gameID):
         temp=int(temp)+1
 
     for i in range(2,count):
-        print(i)
         if gameID == sheet["A"+str(i)].value:
             if answer == True:
                 sheet["B"+str(i)]=sheet["B"+str(i)].value+1
@@ -38,4 +37,4 @@ def answertoDB(answer, gameID):
                 workbook.save("check.xlsx")
                 break
 
-checkAnswer(answer, id , Cube)
+answertoDB(True, 2)
