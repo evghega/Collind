@@ -14,6 +14,7 @@ def checkAnswer(answer, id, Cube):
 def CreateGameID():
     workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
     sheet = workbook.active
+    test="test"
     size = len(sheet['A'])
     gameid = sheet.cell(size,1).value+1
     sheet.cell(size+1, 1).value = gameid
