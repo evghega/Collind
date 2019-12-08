@@ -9,22 +9,24 @@ RED = (255, 0, 0)
 pygame.init()
 
 # Set the width and height of the screen [width, height]
-size = (1400, 600)
+size = (950, 600)
 screen = pygame.display.set_mode(size)
 screen_Num=0
 Mouse_x=0
 Mouse_y=0
-A1_x=400
-A1_y=400
-A2_x=600
-A2_y=400
-A3_x=800
-A3_y=400
+A1_x=80
+A1_y=450
+A2_x=250
+A2_y=450
+A3_x=420
+A3_y=450
+A4_x=600
+A4_y=450
 A_wid=150
 A_hig=100
-Pause_x = 1200
-Pause_y=450
-Center_x= 1400/2-A_wid
+Pause_x =10
+Pause_y=10
+Center_x= 950/2-A_wid
 Center_y= 600/2-A_hig
 
 font = pygame.font.Font(None, 36)
@@ -92,6 +94,7 @@ while not done:
         pygame.draw.rect(screen, BLACK, [A1_x, A1_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [A2_x, A2_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [A3_x, A3_y, A_wid, A_hig], 2)
+        pygame.draw.rect(screen, BLACK, [A4_x, A4_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [Pause_x, Pause_y, A_wid, A_hig], 2)
         text = font.render("Pause", True, BLACK)
         screen.blit(text, [Pause_x + 10, Pause_y + A_hig / 2])
