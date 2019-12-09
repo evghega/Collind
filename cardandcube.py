@@ -4,7 +4,7 @@ def coub():
     num = randint(1,6) 
     
     if(num==1):
-        return 1   
+        retu6rn 1
     if(num==2):
         return 2
     if(num==3):
@@ -19,11 +19,13 @@ def coub():
     return num
 
 
+
+
 def card():
     
     card = randint(1,5)
     if(card==1):
-        return 1   
+        return 1  
     if(card==2):
         return 2
     if(card==3):
@@ -33,7 +35,7 @@ def card():
     if(card==5):
         return 5
     if(card==6):
-        return 6
+        return
     
         
          

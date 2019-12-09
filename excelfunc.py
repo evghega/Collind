@@ -10,7 +10,6 @@ def checkAnswer(answer, id, Cube):
     else:
         return False
 
-
 def CreateGameID():
     workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
     sheet = workbook.active
