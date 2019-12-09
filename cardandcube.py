@@ -1,5 +1,4 @@
 from random import randint
-
 def coub():
     
     num = randint(1,6) 
