@@ -26,21 +26,10 @@ def CreateGameID():
 def answertoDB(answer, gameID):
     workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
     sheet = workbook.active
-    temp = 2
-    count = 0
-    while sheet["A" + str(temp)].value != None:
-        count = count + 1
-        temp = int(temp) + 1
+    if answer:
+        sheet["B"+str(gameID+1)].value += 1
+        workbook.save("check.xlsx")
 
-    for i in range(2, count):
-        if gameID == sheet["A" + str(i)].value:
-            if answer == True:
-                sheet["B" + str(i)] = sheet["B" + str(i)].value + 1
-                workbook.save("check.xlsx")
-                break
-            else:
-                sheet["C" + str(i)] = sheet["C" + str(i)].value + 1
-                workbook.save("check.xlsx")
-                break
-
-
+    else:
+        sheet["C" + str(gameID+1)].value += 1
+        workbook.save("check.xlsx")
