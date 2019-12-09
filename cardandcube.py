@@ -19,11 +19,13 @@ def coub():
     return num
 
 
+
+
 def card():
     
     card = randint(1,5)
     if(card==1):
-        return 1   
+        return 1  
     if(card==2):
         return 2
     if(card==3):
