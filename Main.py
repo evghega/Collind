@@ -1,4 +1,7 @@
 import pygame
+import random
+import excelfunc
+
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -11,6 +14,8 @@ pygame.init()
 # Set the width and height of the screen [width, height]
 size = (950, 600)
 screen = pygame.display.set_mode(size)
+
+#Variables
 screen_Num=0
 Mouse_x=0
 Mouse_y=0
@@ -28,16 +33,31 @@ Pause_x =10
 Pause_y=10
 Center_x= 950/2-A_wid
 Center_y= 600/2-A_hig
+GameID=0
 
 font = pygame.font.Font(None, 36)
 
 pygame.display.set_caption("My Game")
 
 #functions
-def card(xx,yy):
-    img = pygame.image.load(r'CARD1.png')
+def card(Card_Num):
+    if Card_Num == 1:
+        img = pygame.image.load(r'CARD1.png')
+    if Card_Num == 2:
+        img = pygame.image.load(r'CARD2.png')
+    if Card_Num == 3:
+        img = pygame.image.load(r'CARD3.png')
+    if Card_Num == 4:
+        img = pygame.image.load(r'CARD4.png')
+    if Card_Num == 5:
+        img = pygame.image.load(r'CARD5.png')
+    if Card_Num == 6:
+        img = pygame.image.load(r'CARD6.png')
+    else:
+        img = pygame.image.load(r'CARD1.png')
+
     img = pygame.transform.scale(img,(int(728/3),int(1052/3)))
-    screen.blit(img, (xx,yy))
+    screen.blit(img, (Center_x, Center_y))
 
 
 def click(Mouse_x, Mouse_y):
@@ -87,17 +107,29 @@ while not done:
         text = font.render("Start Game", True , BLACK)
         screen.blit(text,[A2_x+2,A2_y+A_hig/2])
         if click(Mouse_x, Mouse_y) == 2:
+            Card_Num = random.randint(1, 6)
             screen_Num = 1
+            GameID=excelfunc.CreateGameID()
 
     elif screen_Num == 1:
-        card(450,10)
+        card(Card_Num)
         pygame.draw.rect(screen, BLACK, [A1_x, A1_y, A_wid, A_hig], 2)
+        text = font.render("1", True, BLACK)
+        screen.blit(text, [Pause_x + 10, Pause_y + A_hig / 2])
         pygame.draw.rect(screen, BLACK, [A2_x, A2_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [A3_x, A3_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [A4_x, A4_y, A_wid, A_hig], 2)
         pygame.draw.rect(screen, BLACK, [Pause_x, Pause_y, A_wid, A_hig], 2)
         text = font.render("Pause", True, BLACK)
         screen.blit(text, [Pause_x + 10, Pause_y + A_hig / 2])
+
+        if click(Mouse_x , Mouse_y) == 1:
+            excelfunc.answertoDB(excelfunc.checkAnswer(1,GameID,Card_Num),GameID)
+        if click(Mouse_x, Mouse_y) == 2:
+            excelfunc.answertoDB(excelfunc.checkAnswer(2,GameID,Card_Num),GameID)
+        if click(Mouse_x, Mouse_y) == 3:
+            excelfunc.answertoDB(excelfunc.checkAnswer(3,GameID,Card_Num),GameID)
+
         if click(Mouse_x, Mouse_y) == 4:
             screen_Num = 2
 
