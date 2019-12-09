@@ -1,6 +1,5 @@
 import pygame
 import random
-import pygame_gui
 import excelfunc
 
 # Define some colors
