@@ -36,7 +36,7 @@ GameID = 0
 count = 0
 font = pygame.font.Font(None, 48)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Collind")
 
 
 # functions
@@ -53,6 +53,10 @@ def card(Card_Num):
         img = pygame.image.load(r'CARD5.png')
     if Card_Num == 6:
         img = pygame.image.load(r'CARD6.png')
+    if Card_Num == 7:
+        img = pygame.image.load(r'CARD7.png')
+    if Card_Num == 8:
+        img = pygame.image.load(r'CARD8.png')
     else:
         img = pygame.image.load(r'CARD1.png')
 
@@ -101,11 +105,11 @@ while not done:
 
     # If you want a background image, replace this clear with blit'ing the
     # background image.
-    screen.fill(WHITE)
+   # screen.fill(pygame.image.load(r'CARD5.png'))
+    background_image = pygame.image.load("loginbackground.png").convert()
+    screen.blit(background_image, [0, 0])
     # --- Drawing code should go here
     if screen_Num == 0:
-        text = font.render("--Collind--", True, BLACK)
-        screen.blit(text, [450, 100])
         font = pygame.font.Font(None, 36)
         StartB = pygame.draw.rect(screen, BLACK, [Center_x, Center_y, A_wid, A_hig], 1)
         text = font.render("Start Game", True, BLACK)
