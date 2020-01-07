@@ -3,13 +3,12 @@ from openpyxl import Workbook
 
 
 def checkAnswer(answer, id, Cube):
-    workbook = Workbook()
+    workbook = openpyxl.load_workbook("cards.xlsx")
     sheet = workbook.active
-    if answer == sheet[Cube + str(id)]:
+    if answer == sheet[Cube + str(id)].value:
         return True
     else:
         return False
-
 
 def CreateGameID():
     workbook = openpyxl.load_workbook("check.xlsx")  # getting the database location
@@ -44,4 +43,3 @@ def answertoDB(answer, gameID):
                 break
 
 
-CreateGameID()
