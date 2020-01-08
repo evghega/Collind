@@ -1,6 +1,8 @@
 import pygame
 import random
 import excelfunc
+from pygame.locals import *
+import pygame_textinput
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -13,7 +15,7 @@ Clock = pygame.time.Clock()
 # Set the width and height of the screen [width, height]
 size = (950, 600)
 screen = pygame.display.set_mode(size)
-
+textinput = pygame_textinput.TextInput()
 # Variables
 screen_Num = 0
 Mouse_x = 0
@@ -35,6 +37,11 @@ Center_y = 300
 GameID = 0
 count = 0
 font = pygame.font.Font(None, 48)
+username=""
+password=""
+hash=""
+badpassword=False
+baduser=False
 
 pygame.display.set_caption("Collind")
 
@@ -83,7 +90,6 @@ done = False
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
-
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop
@@ -107,23 +113,84 @@ while not done:
     # background image.
    # screen.fill(pygame.image.load(r'CARD5.png'))
     background_image = pygame.image.load("loginbackground.png").convert()
+    badpassword_image = pygame.image.load("WorngPassword.png").convert()
+    baduser_image = pygame.image.load("WorngUserName.png").convert()
     screen.blit(background_image, [0, 0])
     # --- Drawing code should go here
     if screen_Num == 0:
-        font = pygame.font.Font(None, 36)
-        StartB = pygame.draw.rect(screen, BLACK, [Center_x, Center_y, A_wid, A_hig], 1)
-        text = font.render("Start Game", True, BLACK)
-        screen.blit(text, [Center_x + 2, Center_y + A_hig / 2])
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            Mouse_x, Mouse_y = event.pos
-            if StartB.collidepoint(Mouse_x, Mouse_y):
-                Card_Num = random.randint(1, 6)
-                Cube_Num = chr(random.randrange(65, 65 + 5))
-                print(Card_Num,Cube_Num)
-                screen_Num = 1
-                GameID = excelfunc.CreateGameID()
+        running = True
+        while running:
+           # textinput.update(events)
+
+         print(username)
+         for evt in pygame.event.get():
+            if evt.type == KEYDOWN:
+                if evt.unicode.isalpha():
+                    username += evt.unicode
+                elif evt.key == K_BACKSPACE:
+                     username = username[:-1]
+                elif evt.key == K_RETURN:
+                     running = False
+         if(baduser):
+            screen.blit(baduser_image,[0, 0])
+         if (badpassword):
+            screen.blit(baduser_image, [0, 0])
+         block = font.render(username, True, (0, 0, 0))
+         if(not baduser and not baduser):
+          screen.blit(background_image, [0, 0])
+         screen.blit(block, [350, -50+Center_y + A_hig / 2])
+         pygame.display.flip()
+        while not running:
+            # textinput.update(events)
+
+            print(password)
+            for evt in pygame.event.get():
+                if evt.type == KEYDOWN:
+                    if evt.unicode.isalpha():
+                        baduser = False
+                        badpassword = False
+                        password += evt.unicode
+                        hash+="*"
+                    elif evt.key == K_BACKSPACE:
+                        password = password[:-1]
+                        hash = hash[:-1]
+                    elif evt.key == K_RETURN:
+                        running = True
+                        tuple=excelfunc.login(username,password)
+                        print(tuple[1])
+                        if (tuple[0] == False):
+                            screen_Num = 0
+                            if(tuple[1]=='badpassword'):
+                                badpassword=True
+                                username=""
+                                hase=""
+                                password=""
+                            else:
+                                baduser=True
+                                username = ""
+                                hase = ""
+                                password = ""
+
+                        if (tuple[0] == True):
+                            if (tuple[1] == 'admin'):
+                                screen_Num = 1
+            if (baduser):
+                screen.blit(baduser_image, [0, 0])
+            if (badpassword):
+                screen.blit(baduser_image, [0, 0])
+            block = font.render(hash, True, (0, 0, 0))
+            block2 = font.render(username, True, (0, 0, 0))
+            if (not baduser and not baduser):
+             screen.blit(background_image, [0, 0])
+            screen.blit(block, [350, 70 + Center_y + A_hig / 2])
+            screen.blit(block2, [350, -50 + Center_y + A_hig / 2])
+            pygame.display.flip()
+
 
     elif screen_Num == 1:
+      manager_image=pygame.image.load("ManagerMain.png").convert()
+      screen.blit(manager_image, [0, 0])
+    elif screen_Num == 3:
         card(Card_Num)
         A1 = pygame.draw.rect(screen, BLACK, [A1_x, A1_y, A_wid, A_hig], 2)
         text = font.render("1", True, BLACK)

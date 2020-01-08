@@ -1,10 +1,4 @@
 from random import randint
-<<<<<<< HEAD:Hachaton.py
-
-
-
-=======
->>>>>>> a35fce1e316e76ca0c1f0efabecbcdcf2b4912e4:cardandcube.py
 def coub():
     
     num = randint(1,6) 
