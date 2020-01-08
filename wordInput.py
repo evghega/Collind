@@ -1,16 +1,14 @@
 from docxtpl import DocxTemplate
 
-
-def wordInput(date, title, fname, sname):
-    doc = DocxTemplate("Example.docx")
-    context = {'date': date, 'title': title, 'firstName': fname, 'secondName': sname}
+def wordInput(name, date, num1, num2):
+    doc = DocxTemplate("Report.docx")
+    context = {'name': name, 'date': date, 'trueAns': num1, 'falseAns': num2}
     doc.render(context)
-    doc.save("Example_new.docx")
+    doc.save("Report_new.docx")
 
-
+name='David Israeli'
 date = '01/01/2020'
-title = 'Example sheet'
-fname = 'David Israeli'
-sname = 'Shlomo Koen'
+num1 = 3
+num2 = 1
 
-wordInput(date, title, fname, sname)
+wordInput(name, date, num1, num2)
