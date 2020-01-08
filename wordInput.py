@@ -4,7 +4,7 @@ def wordInput(name, date, num1, num2):
     doc = DocxTemplate("Report.docx")
     context = {'name': name, 'date': date, 'trueAns': num1, 'falseAns': num2}
     doc.render(context)
-    doc.save("Report_new.docx")
+    doc.save("Report_new.docx")     #make new report file in the same folder
 
 name='David Israeli'
 date = '01/01/2020'
