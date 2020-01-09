@@ -77,6 +77,26 @@ def addUser(username, password, name, lastname, email, phone, type):  # דריש
     workbook.save("gameSQL.xlsx")
     return True
 
+def editUser(i_d,edit,edit_choice):
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Users')
+    for i in range(2, sheet.max_row + 1):
+        if sheet['A' + str(i)].value == i_d:
+            if edit_choice == 'UserName':
+                sheet['B' + str(i)] = edit
+            if edit_choice == 'Password':
+                sheet['C' + str(i)] = edit
+            if edit_choice == 'Name':
+                sheet['D' + str(i)] = edit
+            if edit_choice == 'Lastname':
+                sheet['E' + str(i)] = edit
+            if edit_choice == 'email':
+                sheet['F' + str(i)] = edit
+            if edit_choice == 'phone':
+                sheet['G' + str(i)] = edit
+            if edit_choice == 'type':
+                sheet['H' + str(i)] = edit
+    workbook.save("gameSQL.xlsx")
 
 def deleteUser(i_d):  # דרישה 7,15
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
@@ -156,7 +176,7 @@ def gamesOfUser(usename):  # דרישה 13,5
 #answertoDB(True, 6)
 
 
-def Card_enable(card_num):
+def Card_enable(card_num): #דרישה 8.2
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Cards')
     for i in range(2, sheet.max_row + 1):
