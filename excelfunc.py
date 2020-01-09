@@ -4,10 +4,10 @@ from datetime import date
 
 
 
-def checkAnswer(answer, id, Cube):
-    workbook = openpyxl.load_workbook("cards.xlsx")
-    sheet = workbook.active
-    if answer == sheet[Cube + str(id)].value:
+def checkAnswer(answer, card, Cube):
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Cards')
+    if answer == sheet[Cube + str(card+2)].value:
         return True
     else:
         return False
@@ -27,7 +27,7 @@ def CreateGameID(user_id): #(by Tzlil) דרישה 18,22
     d1 = str(today.strftime("%d.%m.%Y"))
     sheet['E' + str(count)] = d1
     workbook.save("gameSQL.xlsx")
-    return True
+    return count-1
 
 def answertoDB(answer, gameID):
     workbook = openpyxl.load_workbook("gameSQL.xlsx")  # getting the database location
@@ -46,7 +46,7 @@ def login(user,password):  #דרישה 1, 11,21
     for i in range(2,sheet.max_row+1):
         if sheet['B'+str(i)].value == user:
             if sheet['C'+str(i)].value == password:
-                return (True,sheet['H'+str(i)].value)
+                return (True,sheet['H'+str(i)].value,sheet['A'+str(i)].value)
             else:
                 return (False,'badpassword')
     return (False,'badusername')

@@ -1,6 +1,7 @@
 import pygame
 import random
 import excelfunc
+import cardandcube
 from pygame.locals import *
 import pygame_textinput
 
@@ -45,7 +46,12 @@ baduser=False
 subScreen_num = 0 #screen 3 helper
 pygame.display.set_caption("Collind")
 pos=0
-
+cardenable=False
+cubeenable=False
+card_image=None
+cube_image=None
+cubenum=0
+cardnum=0
 # functions
 def card(Card_Num):
     if Card_Num == 1:
@@ -160,10 +166,13 @@ while not done:
                         if (tuple[0] == True):
                             if (tuple[1] == 'admin'):
                                 screen_Num = 1
+                                userid=tuple[2]
                             if (tuple[1] == 'tester'):
                                 screen_Num = 2
+                                userid = tuple[2]
                             if (tuple[1] == 'user'):
                                 screen_Num = 3
+                                userid = tuple[2]
             if (baduser):
                 screen.blit(baduser_image, [0, 0])
             if (badpassword):
@@ -193,10 +202,12 @@ while not done:
           #the Rules Button
        if((pos[0]>235 and pos[0]<419) and (pos[1]>229 and pos[1]<296) and pygame.mouse.get_pressed()[0]):
           subScreen_num=1
-          pos=False
+         # pos=False
            #The StartGame Button
        if ((pos[0] > 501 and pos[0] < 681) and (pos[1] > 238 and pos[1] < 301) and pygame.mouse.get_pressed()[0]):
            screen_Num = 4
+           gameid=excelfunc.CreateGameID(userid)
+           print(gameid)
            #Exit Func
        if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) and pygame.mouse.get_pressed()[0]):
            pygame.quit()
@@ -213,16 +224,45 @@ while not done:
 
     #Board Game!!
     elif screen_Num == 4:
+        cardid=0
         game_image = pygame.image.load("Game.png").convert()
         screen.blit(game_image, [0, 0])
+        if(cardenable):
+            screen.blit(card_image, [600, 65])
+        if (cubeenable):
+            screen.blit(cube_image, [369, 91])
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
         if (pos):
             print(pos)
-            # the Rules Button
-            if ((pos[0] > 235 and pos[0] < 419) and (pos[1] > 229 and pos[1] < 296) and pygame.mouse.get_pressed()[0]):
-                subScreen_num = 1
-                pos = False
+            # pull card
+            if ((pos[0] > 708 and pos[0] < 838) and (pos[1] > 537 and pos[1] < 571)):
+              card_image= cardandcube.card()[0]
+              cardnum = cardandcube.card()[1]
+              cardenable=True
+            #pull cube
+            if ((pos[0] > 400 and pos[0] < 595) and (pos[1] > 309 and pos[1] < 346)):
+              cube_image= cardandcube.cube()[0]
+              cubenum=cardandcube.cube()[1]
+              cubeenable=True
+            #answer1
+            if ((pos[0] > 118 and pos[0] < 243) and (pos[1] > 412 and pos[1] < 594)):
+                 print("1")
+                 print(cardnum,cubenum)
+                 excelfunc.answertoDB(excelfunc.checkAnswer(1,cardnum,cubenum),gameid)
+            # answer2
+            if ((pos[0] > 280 and pos[0] < 412) and (pos[1] > 411 and pos[1] < 594) and pygame.mouse.get_pressed()[0]):
+                 excelfunc.answertoDB(excelfunc.checkAnswer(2,cardnum,cubenum),gameid)
+                 print("2")
+                 print(cardnum, cubenum)
+            # answer3
+            if ((pos[0] > 458and pos[0] < 580) and (pos[1] > 412 and pos[1] < 594) and pygame.mouse.get_pressed()[0]):
+                 excelfunc.answertoDB(excelfunc.checkAnswer(3,cardnum,cubenum),gameid)
+                 print("3")
+                 print(cardnum, cubenum)
+            pos = False
+
+
 
 
     elif screen_Num == 5:
