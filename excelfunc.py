@@ -179,12 +179,12 @@ def Card_enable(card_num): #דרישה 8.2
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Cards')
     for i in range(2, sheet.max_row + 1):
-        if str(sheet['H' + str(i)].value) == card_num:
+        if sheet['A' + str(i)].value == card_num:
             if str(sheet['I' + str(i)].value) == 'yes':
-                sheet['I' + str(i)] = 'no'
+                sheet['I' + str(i)].value = 'no'
                 workbook.save("gameSQL.xlsx")
-                return False
+                return None
             if str(sheet['I' + str(i)].value) == 'no':
-                sheet['I' + str(i)] = 'yes'
+                sheet['I' + str(i)].value = 'yes'
                 workbook.save("gameSQL.xlsx")
-                return True
+                return None
