@@ -42,3 +42,29 @@ def readFile(fileName):
 # example:
 # print(readFile('Report_new.docx')) #Need print!!!
 #########################
+
+
+listID = [name, date, num1, num2]  # example for game data
+gamesList = [1, 2, 3, 4]  # example for list of game ID's
+
+
+def menu(gameId, listOfGames):
+    print('If you want list of games, enter "1"')
+    print('If you want report of your game, enter "2"')
+    ask = int(input('Enter here: '))
+
+    if ask == 1:
+        # print(listOfGames)  # print list of games ID
+        for i in range(1, len(listOfGames)+1):
+            print('Game ID: {}'.format(i))  # print ID of each game
+
+        ask2 = int(input('Choose game that you want to have a report: '))
+        wordInput(gameId[0], gameId[1], gameId[2], gameId[3])  # input data into report and make new report file
+        print(readFile('Report_new.docx'))  # print new report file
+
+    if ask == 2:
+        wordInput(gameId[0], gameId[1], gameId[2], gameId[3])  # input data into report and make new report file
+        print(readFile('Report_new.docx'))  # print new report file
+
+# example of report menu:
+# menu(listID, gamesList)  # print menu
