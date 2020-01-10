@@ -50,6 +50,5 @@ def card():
         return (pygame.image.load("CARD7.png"),7)
     if (card == 8):
         return (pygame.image.load("CARD8.png"),8)
-    
-        
-         
+
+
