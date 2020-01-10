@@ -1,5 +1,8 @@
 from docxtpl import DocxTemplate
 import docx
+import openpyxl
+from openpyxl import Workbook
+from datetime import date
 
 
 def wordInput(name, date, num1, num2):
@@ -23,13 +26,6 @@ def wordInput(name, date, num1, num2):
     doc.render(context)
     doc.save("Report_new.docx")  # make new report file in the same folder
 
-# examples of game data for word file
-name = 'David Israeli'
-date = '01/01/2020'
-num1 = 3
-num2 = 1
-
-wordInput(name, date, num1, num2)
 
 ######################## print word file
 def readFile(fileName):
@@ -39,32 +35,70 @@ def readFile(fileName):
         completedText.append(paragraph.text)
     return '\n'.join(completedText)
 
+
 # example:
 # print(readFile('Report_new.docx')) #Need print!!!
 #########################
 
 
-listID = [name, date, num1, num2]  # example for game data
-gamesList = [1, 2, 3, 4]  # example for list of game ID's
-
-
-def menu(gameId, listOfGames):
+def menu():
     print('If you want list of games, enter "1"')
     print('If you want report of your game, enter "2"')
     ask = int(input('Enter here: '))
 
     if ask == 1:
-        # print(listOfGames)  # print list of games ID
-        for i in range(1, len(listOfGames)+1):
-            print('Game ID: {}'.format(i))  # print ID of each game
+        list1 = []
+        list2 = []
 
-        ask2 = int(input('Choose game that you want to have a report: '))
-        wordInput(gameId[0], gameId[1], gameId[2], gameId[3])  # input data into report and make new report file
-        print(readFile('Report_new.docx'))  # print new report file
+        workbook = openpyxl.load_workbook("gameSQL.xlsx")
+        sheet1 = workbook['Games']
+        sheet2 = workbook['Users']
+
+        ask3 = str(input('Enter your Date (for example "01.01.2020"): '))
+        for i in range(2, sheet1.max_row + 1):
+            if sheet1['E' + str(i)].value == ask3:
+                list1.append(sheet1['A' + str(i)].value)
+
+        print('Your games ID are: ' + str(list1))
+        ask4 = int(input('Enter game ID that you want a report: '))
+
+        for i in range(2, sheet1.max_row + 1):
+            if sheet1['A' + str(i)].value == ask4:
+                for j in range(2, sheet1.max_row + 1):
+                    if sheet1['D' + str(i)].value == sheet2['A' + str(j)].value:
+                        list2.append(sheet2['D' + str(j)].value + ' ' + sheet2['E' + str(j)].value)
+
+        for i in range(2, sheet1.max_row + 1):
+            if sheet1['A' + str(i)].value == ask4:
+                list2.append(sheet1['E' + str(i)].value)
+                list2.append(sheet1['B' + str(i)].value)
+                list2.append(sheet1['C' + str(i)].value)
+
+        wordInput(list2[0], list2[1], list2[2], list2[3])
 
     if ask == 2:
-        wordInput(gameId[0], gameId[1], gameId[2], gameId[3])  # input data into report and make new report file
-        print(readFile('Report_new.docx'))  # print new report file
 
-# example of report menu:
-# menu(listID, gamesList)  # print menu
+        list1 = []
+        list2 = []
+        ask3 = int(input('Enter your user ID: '))
+
+        workbook = openpyxl.load_workbook("gameSQL.xlsx")
+        sheet1 = workbook['Games']
+        sheet2 = workbook['Users']
+        for i in range(2, sheet1.max_row + 1):
+            if sheet1['D' + str(i)].value == ask3:
+                list1.append(sheet1['A' + str(i)].value)
+        print('Your games ID are: ' + str(list1))
+        ask4 = int(input('Enter game ID that you want a report: '))
+
+        for i in range(2, sheet2.max_row + 1):
+            if sheet2['A' + str(i)].value == ask3:
+                list2.append(sheet2['D' + str(i)].value + ' ' + sheet2['E' + str(i)].value)
+
+        for i in range(2, sheet1.max_row + 1):
+            if sheet1['A' + str(i)].value == ask4:
+                list2.append(sheet1['E' + str(i)].value)
+                list2.append(sheet1['B' + str(i)].value)
+                list2.append(sheet1['C' + str(i)].value)
+
+        wordInput(list2[0], list2[1], list2[2], list2[3])
