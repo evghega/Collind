@@ -1,4 +1,5 @@
 from docxtpl import DocxTemplate
+import docx
 
 
 def wordInput(name, date, num1, num2):
@@ -22,10 +23,22 @@ def wordInput(name, date, num1, num2):
     doc.render(context)
     doc.save("Report_new.docx")  # make new report file in the same folder
 
-
+# examples of game data for word file
 name = 'David Israeli'
 date = '01/01/2020'
 num1 = 3
 num2 = 1
 
 wordInput(name, date, num1, num2)
+
+######################## print word file
+def readFile(fileName):
+    doc = docx.Document(fileName)
+    completedText = []
+    for paragraph in doc.paragraphs:
+        completedText.append(paragraph.text)
+    return '\n'.join(completedText)
+
+# example:
+# print(readFile('Report_new.docx')) #Need print!!!
+#########################
