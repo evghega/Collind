@@ -3,16 +3,17 @@ from openpyxl import Workbook
 from datetime import date
 
 
-def checkAnswer(answer, id, Cube):
-    workbook = openpyxl.load_workbook("cards.xlsx")
-    sheet = workbook.active
-    if answer == sheet[Cube + str(id)].value:
+
+def checkAnswer(answer, card, Cube):
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Cards')
+    if answer == sheet[Cube + str(card+2)].value:
         return True
     else:
         return False
 
 
-def CreateGameID(user_id):  # (by Tzlil) דרישה 18,22
+def CreateGameID(user_id): #(by Tzlil) דרישה 18,22
     workbook = openpyxl.load_workbook("gameSQL.xlsx")  # getting the database location
     sheet = workbook.get_sheet_by_name('Games')
     count = 2
@@ -26,31 +27,29 @@ def CreateGameID(user_id):  # (by Tzlil) דרישה 18,22
     d1 = str(today.strftime("%d.%m.%Y"))
     sheet['E' + str(count)] = d1
     workbook.save("gameSQL.xlsx")
-    return True
-
+    return count-1
 
 def answertoDB(answer, gameID):
     workbook = openpyxl.load_workbook("gameSQL.xlsx")  # getting the database location
     sheet = workbook.get_sheet_by_name('Games')
     if answer:
-        sheet["B" + str(gameID + 1)].value += 1
+        sheet["B"+str(gameID+1)].value += 1
         workbook.save("gameSQL.xlsx")
 
     else:
-        sheet["C" + str(gameID + 1)].value += 1
+        sheet["C" + str(gameID+1)].value += 1
         workbook.save("gameSQL.xlsx")
 
-
-def login(user, password):  # דרישה 1, 11,21
+def login(user,password):  #דרישה 1, 11,21
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Users')
-    for i in range(2, sheet.max_row + 1):
-        if sheet['B' + str(i)].value == user:
-            if sheet['C' + str(i)].value == password:
-                return (True, sheet['H' + str(i)].value)
+    for i in range(2,sheet.max_row+1):
+        if sheet['B'+str(i)].value == user:
+            if sheet['C'+str(i)].value == password:
+                return (True,sheet['H'+str(i)].value,sheet['A'+str(i)].value)
             else:
-                return (False, 'badpassword')
-    return (False, 'badusername')
+                return (False,'badpassword')
+    return (False,'badusername')
 
 
 def addUser(username, password, name, lastname, email, phone, type):  # דרישה: 12,3
@@ -180,12 +179,12 @@ def Card_enable(card_num): #דרישה 8.2
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Cards')
     for i in range(2, sheet.max_row + 1):
-        if str(sheet['H' + str(i)].value) == card_num:
+        if sheet['A' + str(i)].value == card_num:
             if str(sheet['I' + str(i)].value) == 'yes':
-                sheet['I' + str(i)] = 'no'
+                sheet['I' + str(i)].value = 'no'
                 workbook.save("gameSQL.xlsx")
-                return False
+                return None
             if str(sheet['I' + str(i)].value) == 'no':
-                sheet['I' + str(i)] = 'yes'
+                sheet['I' + str(i)].value = 'yes'
                 workbook.save("gameSQL.xlsx")
-                return True
+                return None
