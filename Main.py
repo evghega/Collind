@@ -249,8 +249,8 @@ while not done:
          if ((pos[0] > 191 and pos[0] < 255) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(8)
         #Exit
-         if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 38 and pos[1] < 82) ):
-            screen_Num = tempscreen
+         if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 10 and pos[1] < 82)):
+            screen_Num = 1
 
     elif screen_Num == 2:
       tempscreen = 2
