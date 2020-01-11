@@ -24,26 +24,15 @@ def wordInput(name, date, num1, num2):
     doc = DocxTemplate("Report.docx")
     context = {'name': name, 'date': date, 'trueAns': num1, 'falseAns': num2, 'report': rep}
     doc.render(context)
-    doc.save("Report_new.docx")  # make new report file in the same folder
+    doc.save("Report_new_" + name + '_' + date + ".docx")
 
 
-######################## print word file
-def readFile(fileName):
-    doc = docx.Document(fileName)
-    completedText = []
-    for paragraph in doc.paragraphs:
-        completedText.append(paragraph.text)
-    return '\n'.join(completedText)
 
 
-# example:
-# print(readFile('Report_new.docx')) #Need print!!!
-#########################
 
-
-def menu():
-    print('If you want list of games, enter "1"')
-    print('If you want report of your game, enter "2"')
+def menu():  # without arguments!!!!!!!!!!!!!
+    print('Get list of games by date, enter "1"')
+    print('Get list of games by user ID, enter "2"')
     ask = int(input('Enter here: '))
 
     if ask == 1:
@@ -62,7 +51,7 @@ def menu():
         print('Your games ID are: ' + str(list1))
         ask4 = int(input('Enter game ID that you want a report: '))
 
-        for i in range(2, sheet1.max_row + 1):
+        for i in range(2, sheet1.max_row + 11):
             if sheet1['A' + str(i)].value == ask4:
                 for j in range(2, sheet1.max_row + 1):
                     if sheet1['D' + str(i)].value == sheet2['A' + str(j)].value:
