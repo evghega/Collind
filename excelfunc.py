@@ -2,6 +2,7 @@ import openpyxl
 from openpyxl import Workbook
 from datetime import date
 
+from pip._vendor.distlib.compat import raw_input
 
 
 def checkAnswer(answer, card, Cube):
@@ -81,7 +82,7 @@ def editUser(i_d,edit,edit_choice):
     sheet = workbook.get_sheet_by_name('Users')
     for i in range(2, sheet.max_row + 1):
         if sheet['A' + str(i)].value == i_d:
-            if edit_choice == 'UserName':
+            if edit_choice == 'Username':
                 sheet['B' + str(i)] = edit
             if edit_choice == 'Password':
                 sheet['C' + str(i)] = edit
@@ -188,3 +189,17 @@ def Card_enable(card_num): #דרישה 8.2
                 sheet['I' + str(i)].value = 'yes'
                 workbook.save("gameSQL.xlsx")
                 return None
+
+def Print_User_list():
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Users')
+    for i in range(2, sheet.max_row + 1):
+        print("ID: {}  Name: {}  Lastname: {}".format(str(sheet['A' + str(i)].value),str(sheet['D' + str(i)].value),str(sheet['E' + str(i)].value)))
+
+
+def feedback(game_id):
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Games')
+    feed = raw_input("Please enter your feedback on the game")
+    sheet['F'+str(game_id+1)].value = feed
+    workbook.save("gameSQL.xlsx")
