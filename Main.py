@@ -76,12 +76,12 @@ while not done:
         Mouse_x = pos[0]
         Mouse_y = pos[1]
 
-    background_image = pygame.image.load("loginbackground.png").convert()
-    badpassword_image = pygame.image.load("WorngPassword.png").convert()
-    baduser_image = pygame.image.load("WorngUserName.png").convert()
-    pause_image = pygame.image.load("pause.png").convert()
-    users_image = pygame.image.load("users.png").convert()
-    items_image = pygame.image.load("items.png").convert()
+    background_image = pygame.image.load("items\loginbackground.png").convert()
+    badpassword_image = pygame.image.load("items\WorngPassword.png").convert()
+    baduser_image = pygame.image.load("items\WorngUserName.png").convert()
+    pause_image = pygame.image.load("items\pause.png").convert()
+    users_image = pygame.image.load(r"items\users.png").convert()
+    items_image = pygame.image.load("items\items.png").convert()
     screen.blit(background_image, [0, 0])
     # --- Drawing code should go here
     if screen_Num == 0: #login page
@@ -159,7 +159,7 @@ while not done:
 
     elif screen_Num == 1:
       tempscreen = 1
-      manager_image=pygame.image.load("ManagerMain.png").convert()
+      manager_image=pygame.image.load("items\ManagerMain.png").convert()
       screen.blit(manager_image, [0, 0])
       if(usersenable):
           screen.blit(users_image, [0, 0])
@@ -254,7 +254,7 @@ while not done:
 
     elif screen_Num == 2:
       tempscreen = 2
-      tester_image = pygame.image.load("TesterMain.png").convert()
+      tester_image = pygame.image.load("items\TesterMain.png").convert()
       screen.blit(tester_image, [0, 0])
       if (usersenable):
           screen.blit(users_image, [0, 0])
@@ -287,7 +287,7 @@ while not done:
 
     elif screen_Num == 3:
       tempscreen=3
-      user_image = pygame.image.load("UserMain.png").convert()
+      user_image = pygame.image.load(r"items\UserMain.png").convert()
       screen.blit(user_image, [0, 0])
       if event.type == pygame.MOUSEBUTTONUP:
        pos = pygame.mouse.get_pos()
@@ -312,7 +312,7 @@ while not done:
            username = ""
            password = ""
       if subScreen_num==1:
-         rules_image = pygame.image.load("Rules.png").convert()
+         rules_image = pygame.image.load("items\Rules.png").convert()
          screen.blit(rules_image, [0, 0])
          if event.type == pygame.MOUSEBUTTONUP:
           pos = pygame.mouse.get_pos()
@@ -325,7 +325,7 @@ while not done:
     #Board Game!!
     elif screen_Num == 4:
         cardid=0
-        game_image = pygame.image.load("Game.png").convert()
+        game_image = pygame.image.load("items\Game.png").convert()
         screen.blit(game_image, [0, 0])
         if(countans==8):
             #game is over
@@ -383,7 +383,7 @@ while not done:
 
     #game is over
     elif screen_Num == 5:
-        end_image = pygame.image.load("end.png").convert()
+        end_image = pygame.image.load("items\end.png").convert()
         screen.blit(end_image, [0, 0])
         if event.type == pygame.MOUSEBUTTONUP:
          pos = pygame.mouse.get_pos()

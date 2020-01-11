@@ -200,6 +200,12 @@ def Print_User_list():
 def feedback(game_id):
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Games')
-    feed = raw_input("Please enter your feedback on the game")
-    sheet['F'+str(game_id+1)].value = feed
-    workbook.save("gameSQL.xlsx")
+    ask = str(input('do you want to give feedback?(yes or no) '))
+    if ask== "yes":
+     feed = raw_input("Please enter your feedback on the game")
+     sheet['F'+str(game_id+1)].value = feed
+     workbook.save("gameSQL.xlsx")
+    if ask== "no":
+        feed = "אין"
+        sheet['F' + str(game_id + 1)].value = feed
+        workbook.save("gameSQL.xlsx")
