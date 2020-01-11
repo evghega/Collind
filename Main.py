@@ -72,17 +72,6 @@ def card(Card_Num):
 
 
 
-def click(Mouse_x, Mouse_y):
-    if Mouse_x > Center_x and Mouse_x < (Center_x + A_wid) and Mouse_y > Center_y and Mouse_y < (Center_y + A_hig):
-        return 0
-    if Mouse_x > A1_x and Mouse_x < (A1_x + A_wid) and Mouse_y > A1_y and Mouse_y < (A1_y + A_hig):
-        return 1
-    if Mouse_x > A2_x and Mouse_x < (A2_x + A_wid) and Mouse_y > A2_y and Mouse_y < (A2_y + A_hig):
-        return 2
-    if Mouse_x > A3_x and Mouse_x < (A3_x + A_wid) and Mouse_y > A3_y and Mouse_y < (A3_y + A_hig):
-        return 3
-    if Mouse_x > Pause_x and Mouse_x < (Pause_x + A_wid) and Mouse_y > Pause_y and Mouse_y < (Pause_y + A_hig):
-        return 4
 
 
 # Loop until the user clicks the close button.

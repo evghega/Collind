@@ -1,5 +1,5 @@
-
 import excelfunc
+
 
 def action_list():
     while True:
@@ -20,10 +20,11 @@ def action_list():
             edit_choice = input("type which choice edit:\n Username\n Password\n Name\n Lastname\n email\n phone\n "
                                 "type ")
             edit = input("Enter the edit:")
-            excelfunc.editUser(id_num,edit,edit_choice)
+            excelfunc.editUser(id_num, edit, edit_choice)
 
         if command == 3:
             id_num = int(input("Enter id number to delete"))
             excelfunc.deleteUser(id_num)
         if command == 4:
             return
+
