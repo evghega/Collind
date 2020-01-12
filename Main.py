@@ -1,12 +1,10 @@
-import time
 
 import pygame
-import random
 import excelfunc
 import cardandcube
 from pygame.locals import *
-import pygame_textinput
 import Admin_user_edit
+import wordInput
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -18,7 +16,7 @@ Clock = pygame.time.Clock()
 # Set the width and height of the screen [width, height]
 size = (950, 600)
 screen = pygame.display.set_mode(size)
-textinput = pygame_textinput.TextInput()
+#textinput = pygame.TextInput()
 # Variables
 screen_Num = 0
 Mouse_x = 0
@@ -57,6 +55,8 @@ cubenum=0
 cardnum=0
 pauseenable=False
 usersenable =False
+reportenable=False
+feedbackenable=False
 # functions
 
 # Loop until the user clicks the close button.
@@ -71,20 +71,15 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    if pygame.mouse.get_pressed()[0]:
-        pos = pygame.mouse.get_pos()
-        Mouse_x = pos[0]
-        Mouse_y = pos[1]
-
     background_image = pygame.image.load("items\loginbackground.png").convert()
     badpassword_image = pygame.image.load("items\WorngPassword.png").convert()
     baduser_image = pygame.image.load("items\WorngUserName.png").convert()
     pause_image = pygame.image.load("items\pause.png").convert()
     users_image = pygame.image.load(r"items\users.png").convert()
     items_image = pygame.image.load("items\items.png").convert()
-    screen.blit(background_image, [0, 0])
     # --- Drawing code should go here
     if screen_Num == 0: #login page
+        screen.blit(background_image, [0, 0])
         running = True
         while running:
          print(username)
@@ -161,38 +156,44 @@ while not done:
       tempscreen = 1
       manager_image=pygame.image.load("items\ManagerMain.png").convert()
       screen.blit(manager_image, [0, 0])
+      if reportenable:
+          report_image = pygame.image.load(r"items\report.png").convert()
+          screen.blit(report_image, [0, 0])
+          screen_Num=9
       if(usersenable):
           screen.blit(users_image, [0, 0])
           screen_Num=8
-      if event.type == pygame.MOUSEBUTTONUP:
+      pygame.display.update()
+      if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed():
        pos = pygame.mouse.get_pos()
-      if(pos):
-       print(pos)
+       if(pos):
+        print(pos)
           #items
-       if((pos[0]>675 and pos[0]<855) and (pos[1]>220 and pos[1]<296)):
+        if((pos[0]>675 and pos[0]<855) and (pos[1]>220 and pos[1]<296)):
            screen_Num=10
            print("items")
            #users
-       if ((pos[0] > 440 and pos[0] < 620) and (pos[1] > 220 and pos[1] < 296) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 440 and pos[0] < 620) and (pos[1] > 220 and pos[1] < 296)):
            usersenable=True
            #reports
-       if ((pos[0] > 170 and pos[0] < 349) and (pos[1] > 220 and pos[1] < 290) and pygame.mouse.get_pressed()[0]):
-           subScreen_num = 7
+        if ((pos[0] > 170 and pos[0] < 349) and (pos[1] > 220 and pos[1] < 290) ):
+           reportenable=True
            #startgame
-       if ((pos[0] > 323 and pos[0] < 504) and (pos[1] > 350 and pos[1] < 422) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 323 and pos[0] < 504) and (pos[1] > 350 and pos[1] < 422)):
            screen_Num=4
            gameid = excelfunc.CreateGameID(userid)
            print(gameid)
            countans = 0
            cardnum = 0
            cubenum = 0
-       if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42)):
            screen_Num=0
            hash=""
            username=""
            password=""
-       pos=False
+        pos=False
     elif screen_Num==8:
+          pygame.display.update()
           Admin_user_edit.action_list()
           usersenable=False
           screen_Num=tempscreen
@@ -200,8 +201,9 @@ while not done:
 
         #items Screen
     elif screen_Num == 10:
+     pygame.display.update()
      screen.blit(items_image, [0, 0])
-     if event.type == pygame.MOUSEBUTTONUP:
+     if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed():
         pos = pygame.mouse.get_pos()
         if (pos):
          print(pos,"screen 10")
@@ -251,54 +253,58 @@ while not done:
         #Exit
          if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 10 and pos[1] < 82)):
             screen_Num = 1
-
+         pos = False
     elif screen_Num == 2:
       tempscreen = 2
       tester_image = pygame.image.load("items\TesterMain.png").convert()
       screen.blit(tester_image, [0, 0])
+      if reportenable:
+          report_image = pygame.image.load(r"items\report.png").convert()
+          screen.blit(report_image, [0, 0])
+          screen_Num = 9
       if (usersenable):
           screen.blit(users_image, [0, 0])
           screen_Num = 8
-      if event.type == pygame.MOUSEBUTTONUP:
+      if event.type == pygame.MOUSEBUTTONDOWN:
        pos = pygame.mouse.get_pos()
-      if(pos):
-       print(pos)
+       if(pos):
+        print(pos)
           #users
-       if((pos[0]>513 and pos[0]<691) and (pos[1]>236 and pos[1]<296)):
+        if((pos[0]>513 and pos[0]<691) and (pos[1]>236 and pos[1]<296)):
            usersenable = True
            # reports
-       if ((pos[0] > 237 and pos[0] < 419) and (pos[1] > 234 and pos[1] < 292) and pygame.mouse.get_pressed()[0]):
-           subScreen_num = 7
+        if ((pos[0] > 237 and pos[0] < 419) and (pos[1] > 234 and pos[1] < 292) ):
+           reportenable = True
            # startgame
-       if ((pos[0] > 393 and pos[0] < 574) and (pos[1] > 370 and pos[1] < 439) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 393 and pos[0] < 574) and (pos[1] > 370 and pos[1] < 439) ):
            screen_Num = 4
            gameid = excelfunc.CreateGameID(userid)
            print(gameid)
            countans = 0
            cardnum = 0
            cubenum = 0
-       if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) ):
            screen_Num = 0
            hash = ""
            username = ""
            password = ""
-       pos= False
+        pos= False
 
 
     elif screen_Num == 3:
       tempscreen=3
       user_image = pygame.image.load(r"items\UserMain.png").convert()
       screen.blit(user_image, [0, 0])
-      if event.type == pygame.MOUSEBUTTONUP:
+      if event.type == pygame.MOUSEBUTTONDOWN:
        pos = pygame.mouse.get_pos()
-      if(pos):
-       print(pos)
+       if(pos):
+        print(pos)
           #the Rules Button
-       if((pos[0]>235 and pos[0]<419) and (pos[1]>229 and pos[1]<296) and pygame.mouse.get_pressed()[0]):
+        if((pos[0]>235 and pos[0]<419) and (pos[1]>229 and pos[1]<296) ):
           subScreen_num=1
          # pos=False
            #The StartGame Button
-       if ((pos[0] > 501 and pos[0] < 681) and (pos[1] > 238 and pos[1] < 301) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 501 and pos[0] < 681) and (pos[1] > 238 and pos[1] < 301) ):
            screen_Num = 4
            gameid=excelfunc.CreateGameID(userid)
            print(gameid)
@@ -306,7 +312,7 @@ while not done:
            cardnum=0
            cubenum=0
            #Exit Func
-       if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) and pygame.mouse.get_pressed()[0]):
+        if ((pos[0] > 12 and pos[0] < 160) and (pos[1] > 7 and pos[1] < 42) ):
            screen_Num = 0
            hash = ""
            username = ""
@@ -314,7 +320,7 @@ while not done:
       if subScreen_num==1:
          rules_image = pygame.image.load("items\Rules.png").convert()
          screen.blit(rules_image, [0, 0])
-         if event.type == pygame.MOUSEBUTTONUP:
+         if event.type == pygame.MOUSEBUTTONDOWN:
           pos = pygame.mouse.get_pos()
           if pos:
             print(pos)
@@ -327,19 +333,14 @@ while not done:
         cardid=0
         game_image = pygame.image.load("items\Game.png").convert()
         screen.blit(game_image, [0, 0])
-        if(countans==8):
+        if(countans>=8):
             #game is over
-             print("Game Is Over")
-             screen_Num =5
-        if(cardenable):
-            screen.blit(card_image, [600, 65])
-        if (cubeenable):
-            screen.blit(cube_image, [355, 91])
-        if (pauseenable):
-            screen.blit(pause_image, [300, 107])
-        if event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
-        if (pos):
+            feedbackenable=True
+
+
+        if event.type == pygame.MOUSEBUTTONDOWN :
+         pos = pygame.mouse.get_pos()
+         if (pos):
             print(pos)
             # pull card
             if ((pos[0] > 708 and pos[0] < 838) and (pos[1] > 537 and pos[1] < 571)):
@@ -348,8 +349,10 @@ while not done:
               cardenable=True
             #pull cube
             if ((pos[0] > 400 and pos[0] < 595) and (pos[1] > 309 and pos[1] < 346)):
-              cube_image= cardandcube.cube()[0]
-              cubenum=cardandcube.cube()[1]
+              cube_tuple= cardandcube.cube()
+              cube_image=cube_tuple[0]
+              cubenum=cube_tuple[1]
+              print(cubenum)
               cubeenable=True
             #answer1
             if ((pos[0] > 118 and pos[0] < 243) and (pos[1] > 412 and pos[1] < 594)):
@@ -358,39 +361,61 @@ while not done:
                  excelfunc.answertoDB(excelfunc.checkAnswer(1,cardnum,cubenum),gameid)
                  countans+=1
             # answer2
-            if ((pos[0] > 280 and pos[0] < 412) and (pos[1] > 411 and pos[1] < 594) and pygame.mouse.get_pressed()[0]):
+            if ((pos[0] > 280 and pos[0] < 412) and (pos[1] > 411 and pos[1] < 594) ):
                  excelfunc.answertoDB(excelfunc.checkAnswer(2,cardnum,cubenum),gameid)
                  print("2")
                  print(cardnum, cubenum)
                  countans += 1
             # answer3
-            if ((pos[0] > 458and pos[0] < 580) and (pos[1] > 412 and pos[1] < 594) and pygame.mouse.get_pressed()[0]):
+            if ((pos[0] > 458and pos[0] < 580) and (pos[1] > 412 and pos[1] < 594) ):
                  excelfunc.answertoDB(excelfunc.checkAnswer(3,cardnum,cubenum),gameid)
                  print("3")
                  print(cardnum, cubenum)
                  countans += 1
             #Back Button
-            if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 38 and pos[1] < 82) and pygame.mouse.get_pressed()[0]):
+            if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 38 and pos[1] < 82) ):
                 screen_Num=tempscreen
             #pause Button
-            if ((pos[0] > 178 and pos[0] < 311) and (pos[1] > 41 and pos[1] < 82) and pygame.mouse.get_pressed()[0]):
+            if ((pos[0] > 178 and pos[0] < 311) and (pos[1] > 41 and pos[1] < 82) ):
                 pauseenable=True
             #coninto button
-            if ((pos[0] > 345 and pos[0] < 695) and (pos[1] > 138 and pos[1] < 244) and pygame.mouse.get_pressed()[0]):
+            if ((pos[0] > 345 and pos[0] < 695) and (pos[1] > 138 and pos[1] < 244) ):
                 pauseenable=False
             pos = False
+        pos = False
+        if (cardenable):
+            screen.blit(card_image, [600, 65])
+        if (cubeenable):
+            screen.blit(cube_image, [355, 91])
+        if (pauseenable):
+            screen.blit(pause_image, [300, 107])
+        if feedbackenable:
+            feed_image = pygame.image.load(r"items\feedback.png").convert()
+            screen.blit(feed_image, [0, 0])
+            screen_Num = 6
+    elif screen_Num == 9:
+        report_image = pygame.image.load(r"items\report.png").convert()
+        screen.blit(report_image, [0, 0])
+        wordInput.menu()
+        screen_Num=tempscreen
+        reportenable=False
 
 
+    elif screen_Num == 6:
+        feed_image = pygame.image.load(r"items\feedback.png").convert()
+        screen.blit(feed_image, [0, 0])
+        excelfunc.feedback(gameid)
+        screen_Num=5
     #game is over
     elif screen_Num == 5:
         end_image = pygame.image.load("items\end.png").convert()
         screen.blit(end_image, [0, 0])
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONDOWN:
          pos = pygame.mouse.get_pos()
-        if (pos):
-         print(pos)
+         if (pos):
+          print(pos)
          # EXIT
-         if ((pos[0] > 279 and pos[0] < 698) and (pos[1] > 298 and pos[1] < 423)):
+          if ((pos[0] > 279 and pos[0] < 698) and (pos[1] > 298 and pos[1] < 423)):
              pygame.quit()
 
 

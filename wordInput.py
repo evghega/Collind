@@ -25,6 +25,7 @@ def wordInput(name, date, num1, num2):
     context = {'name': name, 'date': date, 'trueAns': num1, 'falseAns': num2, 'report': rep}
     doc.render(context)
     doc.save("Report_new_" + name + '_' + date + ".docx")
+    menu()
 
 
 
@@ -33,8 +34,10 @@ def wordInput(name, date, num1, num2):
 def menu():  # without arguments!!!!!!!!!!!!!
     print('Get list of games by date, enter "1"')
     print('Get list of games by user ID, enter "2"')
+    print('Return, Enter "3"')
     ask = int(input('Enter here: '))
-
+    if ask == 3:
+       return
     if ask == 1:
         list1 = []
         list2 = []

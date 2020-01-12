@@ -165,16 +165,6 @@ def gamesOfUser(usename):  # דרישה 13,5
     return list
 
 
-# addUser('neta','abcd','tzlil','levi','tzlil@com','053446','admin')
-# resetUser(2)
-
-
-# print(addUser('snir','123','ngame','jyj','snir@','1234','type'))
-# print(gamesOfUser('admin'))
-
-# print(gameOfDate('09','01','2020'))
-#answertoDB(True, 6)
-
 
 def Card_enable(card_num): #דרישה 8.2
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
@@ -209,3 +199,4 @@ def feedback(game_id):
         feed = "אין"
         sheet['F' + str(game_id + 1)].value = feed
         workbook.save("gameSQL.xlsx")
+    print("Thank you, you can exit the game now")
