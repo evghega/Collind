@@ -136,6 +136,10 @@ def resetUser(i_d):  # דרישה 16
             sheet['B' + str(i)] = None
             sheet['C' + str(i)] = None
             sheet['D' + str(i)] = None
+            sheet['E' + str(i)] = None
+            sheet['F' + str(i)] = None
+
+
             workbook.save("gameSQL.xlsx")
 
 
@@ -200,3 +204,15 @@ def feedback(game_id):
         sheet['F' + str(game_id + 1)].value = feed
         workbook.save("gameSQL.xlsx")
     print("Thank you, you can exit the game now")
+
+
+def listOfUsers(): #דרישה 6
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Users')
+    list=[]
+    for i in range(2, sheet.max_row + 1):
+        if sheet['B' + str(i)].value != None:
+            list.append(sheet['B' + str(i)].value)
+    for i in range(len(list)):
+        print (list[i])
+
