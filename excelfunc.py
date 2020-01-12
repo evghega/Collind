@@ -123,8 +123,8 @@ def deleteUser(i_d):  # דרישה 7,15
                     sheet1['E' + str(i)] = None
                     sheet1['F' + str(i)] = None
                     workbook.save("gameSQL.xlsx")
-            return "true"
-    return 'False'
+            return True
+    return False
 
 
 def resetUser(i_d):  # דרישה 16
