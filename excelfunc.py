@@ -184,7 +184,7 @@ def Card_enable(card_num): #דרישה 8.2
                 workbook.save("gameSQL.xlsx")
                 return None
 
-def Print_User_list():
+def Print_User_list(): #דרישה 6
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Users')
     for i in range(2, sheet.max_row + 1):
@@ -206,13 +206,5 @@ def feedback(game_id):
     print("Thank you, you can exit the game now")
 
 
-def listOfUsers(): #דרישה 6
-    workbook = openpyxl.load_workbook("gameSQL.xlsx")
-    sheet = workbook.get_sheet_by_name('Users')
-    list=[]
-    for i in range(2, sheet.max_row + 1):
-        if sheet['B' + str(i)].value != None:
-            list.append(sheet['B' + str(i)].value)
-    for i in range(len(list)):
-        print (list[i])
+
 

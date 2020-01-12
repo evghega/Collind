@@ -26,7 +26,7 @@ def action_list():
             id_num = int(input("Enter id number to Reset"))
             excelfunc.resetUser(id_num)
         if command == 4:
-            excelfunc.listOfUsers()
+            excelfunc.Print_User_list()
         if command == 5:
             id_num = int(input("Enter id number to delete"))
             excelfunc.deleteUser(id_num)
