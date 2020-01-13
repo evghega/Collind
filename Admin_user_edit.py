@@ -2,7 +2,7 @@ import excelfunc
 
 def action_list():
     while True:
-        command = int(input("Choose command:\n 1.Create user \n 2.Edit user \n 3.Reset user \n 6.list of users \n "
+        command = int(input("Choose command:\n 1.Create user \n 2.Edit user \n 3.Reset user \n 4.list of users \n "
                             "5.Delete user \n 6.Report edit \n 7.Return"))
         print(command)
         if command == 1:
