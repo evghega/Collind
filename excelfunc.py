@@ -136,6 +136,10 @@ def resetUser(i_d):  # דרישה 16
             sheet['B' + str(i)] = None
             sheet['C' + str(i)] = None
             sheet['D' + str(i)] = None
+            sheet['E' + str(i)] = None
+            sheet['F' + str(i)] = None
+
+
             workbook.save("gameSQL.xlsx")
 
 
@@ -180,7 +184,7 @@ def Card_enable(card_num): #דרישה 8.2
                 workbook.save("gameSQL.xlsx")
                 return None
 
-def Print_User_list():
+def Print_User_list(): #דרישה 6
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Users')
     for i in range(2, sheet.max_row + 1):
@@ -200,3 +204,7 @@ def feedback(game_id):
         sheet['F' + str(game_id + 1)].value = feed
         workbook.save("gameSQL.xlsx")
     print("Thank you, you can exit the game now")
+
+
+
+
