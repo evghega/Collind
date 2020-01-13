@@ -1,6 +1,5 @@
 import excelfunc
 
-
 def action_list():
     while True:
         command = int(input("Choose command:\n 1.Create user \n 2.Edit user \n 3.Reset user \n 46.list of users \n "
@@ -35,5 +34,3 @@ def action_list():
             excelfunc.Edit_Report()
         if command == 7:
             return
-
-action_list()
