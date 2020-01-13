@@ -171,7 +171,7 @@ while not done:
           #items
         if((pos[0]>675 and pos[0]<855) and (pos[1]>220 and pos[1]<296)):
            screen_Num=10
-           print("items")
+           print("Enter Items Screen")
            #users
         if ((pos[0] > 440 and pos[0] < 620) and (pos[1] > 220 and pos[1] < 296)):
            usersenable=True
@@ -206,50 +206,64 @@ while not done:
      if event.type == pygame.MOUSEBUTTONDOWN and pygame.mouse.get_pressed():
         pos = pygame.mouse.get_pos()
         if (pos):
-         print(pos,"screen 10")
         #1
          if ((pos[0] > 861 and pos[0] < 923) and (pos[1] > 103 and pos[1] < 154)):
             excelfunc.Card_enable(1)
-            print("change")
+            print("change card stae to yes")
          if ((pos[0] > 861 and pos[0] < 923) and (pos[1] > 174 and pos[1] < 228)):
             excelfunc.Card_enable(1)
+            print("change card stae to no")
         #2
          if ((pos[0] > 660 and pos[0] < 718) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(2)
+            print("change card stae to yes")
          if ((pos[0] > 660 and pos[0] < 718) and (pos[1] > 174 and pos[1] < 228) ):
             excelfunc.Card_enable(2)
+            print("change card stae to no")
 
         #3
          if ((pos[0] > 406 and pos[0] < 459) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(3)
+            print("change card stae to yes")
          if ((pos[0] > 406 and pos[0] < 459) and (pos[1] > 174 and pos[1] < 228) ):
             excelfunc.Card_enable(3)
+            print("change card stae to no")
         #4
          if ((pos[0] > 201 and pos[0] <270) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(4)
+            print("change card stae to yes")
          if ((pos[0] > 201 and pos[0] < 270) and (pos[1] > 174 and pos[1] < 228)):
             excelfunc.Card_enable(4)
+            print("change card stae to no")
         #5
          if ((pos[0] > 869 and pos[0] < 940) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(5)
+            print("change card stae to yes")
          if ((pos[0] > 869 and pos[0] < 940) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(5)
+            print("change card stae to no")
 
         #6
          if ((pos[0] > 667 and pos[0] < 726) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(6)
+            print("change card stae to yes")
          if ((pos[0] > 675 and pos[0] < 855) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(6)
+            print("change card stae to no")
         #7
          if ((pos[0] > 399 and pos[0] < 466) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(7)
+            print("change card stae to yes")
          if ((pos[0] > 403 and pos[0] < 466) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(7)
+            print("change card stae to no")
         #8
          if ((pos[0] > 191 and pos[0] < 255) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(8)
+            print("change card stae to yes")
          if ((pos[0] > 191 and pos[0] < 255) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(8)
+            print("change card stae to no")
         #Exit
          if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 10 and pos[1] < 82)):
             screen_Num = 1
@@ -352,7 +366,6 @@ while not done:
               cube_tuple= cardandcube.cube()
               cube_image=cube_tuple[0]
               cubenum=cube_tuple[1]
-              print(cubenum)
               cubeenable=True
             #answer1
             if ((pos[0] > 118 and pos[0] < 243) and (pos[1] > 412 and pos[1] < 594)):
