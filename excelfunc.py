@@ -205,6 +205,11 @@ def feedback(game_id):
         workbook.save("gameSQL.xlsx")
     print("Thank you, you can exit the game now")
 
-
-
+def Edit_Report():
+    workbook = openpyxl.load_workbook("gameSQL.xlsx")
+    sheet = workbook.get_sheet_by_name('Report')
+    choice = int(input("choose msg report number to change:"))
+    rep = raw_input("Enter new report msg:")
+    sheet['B'+str(choice+1)].value = rep
+    workbook.save("gameSQL.xlsx")
 

@@ -3,7 +3,8 @@ import excelfunc
 
 def action_list():
     while True:
-        command = int(input("Choose command:\n 1.Create user \n 2.Edit user \n 3.Reset user \n 4.list of users \n 5.Delete user \n 6.Return"))
+        command = int(input("Choose command:\n 1.Create user \n 2.Edit user \n 3.Reset user \n 46.list of users \n "
+                            "5.Delete user \n 6.Report edit \n 7.Return"))
         print(command)
         if command == 1:
             user_id = input("Enter user id:")
@@ -31,4 +32,8 @@ def action_list():
             id_num = int(input("Enter id number to delete"))
             excelfunc.deleteUser(id_num)
         if command == 6:
+            excelfunc.Edit_Report()
+        if command == 7:
             return
+
+action_list()
