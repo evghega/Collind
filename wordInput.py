@@ -90,5 +90,3 @@ def menu():  # without arguments!!!!!!!!!!!!!
                 list2.append(sheet1['C' + str(i)].value)
 
         wordInput(list2[0], list2[1], list2[2], list2[3])
-
-menu()

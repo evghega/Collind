@@ -10,7 +10,6 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-
 pygame.init()
 Clock = pygame.time.Clock()
 # Set the width and height of the screen [width, height]
@@ -58,7 +57,11 @@ usersenable =False
 reportenable=False
 feedbackenable=False
 # functions
-
+tempscreen=0
+def checkscreen(n):
+    tempscreen=n
+def ClickBack1():
+    return 1
 # Loop until the user clicks the close button.
 done = False
 
@@ -153,7 +156,7 @@ while not done:
 
 
     elif screen_Num == 1:
-      tempscreen = 1
+      tempscreen=1
       manager_image=pygame.image.load("items\ManagerMain.png").convert()
       screen.blit(manager_image, [0, 0])
       if reportenable:
@@ -231,45 +234,45 @@ while not done:
         #4
          if ((pos[0] > 201 and pos[0] <270) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(4)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 201 and pos[0] < 270) and (pos[1] > 174 and pos[1] < 228)):
             excelfunc.Card_enable(4)
-            print("change card stae to no")
+            print("change card state to no")
         #5
          if ((pos[0] > 869 and pos[0] < 940) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(5)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 869 and pos[0] < 940) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(5)
-            print("change card stae to no")
+            print("change card state to no")
 
         #6
          if ((pos[0] > 667 and pos[0] < 726) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(6)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 675 and pos[0] < 855) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(6)
-            print("change card stae to no")
+            print("change card state to no")
         #7
          if ((pos[0] > 399 and pos[0] < 466) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(7)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 403 and pos[0] < 466) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(7)
-            print("change card stae to no")
+            print("change card state to no")
         #8
          if ((pos[0] > 191 and pos[0] < 255) and (pos[1] > 306 and pos[1] < 362) ):
             excelfunc.Card_enable(8)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 191 and pos[0] < 255) and (pos[1] > 338 and pos[1] < 431) ):
             excelfunc.Card_enable(8)
-            print("change card stae to no")
+            print("change card state to no")
         #Exit
          if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 10 and pos[1] < 82)):
-            screen_Num = 1
+            screen_Num = ClickBack1()
          pos = False
     elif screen_Num == 2:
-      tempscreen = 2
+      tempscreen=2
       tester_image = pygame.image.load("items\TesterMain.png").convert()
       screen.blit(tester_image, [0, 0])
       if reportenable:
@@ -306,14 +309,14 @@ while not done:
 
 
     elif screen_Num == 3:
-      tempscreen=3
+      checkscreen(3)
       user_image = pygame.image.load(r"items\UserMain.png").convert()
       screen.blit(user_image, [0, 0])
       if event.type == pygame.MOUSEBUTTONDOWN:
        pos = pygame.mouse.get_pos()
        if(pos):
         print(pos)
-          #the Rules Button
+          #the Rules Button guideClicked
         if((pos[0]>235 and pos[0]<419) and (pos[1]>229 and pos[1]<296) ):
           subScreen_num=1
          # pos=False
@@ -331,7 +334,7 @@ while not done:
            hash = ""
            username = ""
            password = ""
-      if subScreen_num==1:
+      if subScreen_num==1: #guides28
          rules_image = pygame.image.load("items\Rules.png").convert()
          screen.blit(rules_image, [0, 0])
          if event.type == pygame.MOUSEBUTTONDOWN:
@@ -347,7 +350,7 @@ while not done:
         cardid=0
         game_image = pygame.image.load("items\Game.png").convert()
         screen.blit(game_image, [0, 0])
-        if(countans>=8):
+        if(countans>=8): #endGame
             #game is over
             feedbackenable=True
 
@@ -356,7 +359,7 @@ while not done:
          pos = pygame.mouse.get_pos()
          if (pos):
             print(pos)
-            # pull card
+            # pull card executeNextCard
             if ((pos[0] > 708 and pos[0] < 838) and (pos[1] > 537 and pos[1] < 571)):
               card_image= cardandcube.card()[0]
               cardnum = cardandcube.card()[1]
@@ -388,7 +391,7 @@ while not done:
             #Back Button
             if ((pos[0] > 19 and pos[0] < 153) and (pos[1] > 38 and pos[1] < 82) ):
                 screen_Num=tempscreen
-            #pause Button
+            #pause Button pause pause pause Func
             if ((pos[0] > 178 and pos[0] < 311) and (pos[1] > 41 and pos[1] < 82) ):
                 pauseenable=True
             #coninto button
@@ -400,9 +403,9 @@ while not done:
             screen.blit(card_image, [600, 65])
         if (cubeenable):
             screen.blit(cube_image, [355, 91])
-        if (pauseenable):
+        if (pauseenable): #resumeExe resumeExe resumeExe resumeExe
             screen.blit(pause_image, [300, 107])
-        if feedbackenable:
+        if feedbackenable: #dbAndFeedBack29.2
             feed_image = pygame.image.load(r"items\feedback.png").convert()
             screen.blit(feed_image, [0, 0])
             screen_Num = 6
@@ -435,7 +438,7 @@ while not done:
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
     # --- Limit to 60 frames per second
-    Clock.tick(20)
+    Clock.tick(30)
 
 # Close the window and quit.
 pygame.quit()
