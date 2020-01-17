@@ -143,7 +143,7 @@ def resetUser(i_d):  # דרישה 16
 
 
             workbook.save("gameSQL.xlsx")
-
+    return True
 
 
 def gameOfDate(day, month, year):  # דרישה 17
