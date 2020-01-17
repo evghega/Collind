@@ -40,8 +40,9 @@ def answertoDB(answer, gameID):
     else:
         sheet["C" + str(gameID+1)].value += 1
         workbook.save("gameSQL.xlsx")
+    return True
 
-def login(user,password):  #דרישה 1, 11,21
+def checkDetails(user,password):  #דרישה 1, 11,21
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
     sheet = workbook.get_sheet_by_name('Users')
     for i in range(2,sheet.max_row+1):
@@ -97,6 +98,7 @@ def editUser(i_d,edit,edit_choice):
             if edit_choice == 'type':
                 sheet['H' + str(i)] = edit
     workbook.save("gameSQL.xlsx")
+    return True
 
 def deleteUser(i_d):  # דרישה 7,15
     workbook = openpyxl.load_workbook("gameSQL.xlsx")
@@ -141,6 +143,7 @@ def resetUser(i_d):  # דרישה 16
 
 
             workbook.save("gameSQL.xlsx")
+
 
 
 def gameOfDate(day, month, year):  # דרישה 17

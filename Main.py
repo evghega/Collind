@@ -59,6 +59,7 @@ feedbackenable=False
 # functions
 tempscreen=0
 def checkscreen(n):
+    global tempscreen
     tempscreen=n
 def ClickBack1():
     return 1
@@ -84,6 +85,7 @@ while not done:
     if screen_Num == 0: #login page
         screen.blit(background_image, [0, 0])
         running = True
+        ################EnterDetails############
         while running:
          print(username)
          for evt in pygame.event.get():
@@ -117,7 +119,7 @@ while not done:
                         hash = hash[:-1]
                     elif evt.key == K_RETURN:
                         running = True
-                        tuple=excelfunc.login(username,password)
+                        tuple=excelfunc.checkDetails(username,password)
                         print(tuple[1])
                         if (tuple[0] == False):
                             screen_Num = 0
@@ -153,10 +155,10 @@ while not done:
             screen.blit(block, [350, 70 + Center_y + A_hig / 2])
             screen.blit(block2, [350, -50 + Center_y + A_hig / 2])
             pygame.display.flip()
-
+    ################EnterDetails############
 
     elif screen_Num == 1:
-      tempscreen=1
+      checkscreen(1)
       manager_image=pygame.image.load("items\ManagerMain.png").convert()
       screen.blit(manager_image, [0, 0])
       if reportenable:
@@ -212,25 +214,25 @@ while not done:
         #1
          if ((pos[0] > 861 and pos[0] < 923) and (pos[1] > 103 and pos[1] < 154)):
             excelfunc.Card_enable(1)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 861 and pos[0] < 923) and (pos[1] > 174 and pos[1] < 228)):
             excelfunc.Card_enable(1)
-            print("change card stae to no")
+            print("change card state to no")
         #2
          if ((pos[0] > 660 and pos[0] < 718) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(2)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 660 and pos[0] < 718) and (pos[1] > 174 and pos[1] < 228) ):
             excelfunc.Card_enable(2)
-            print("change card stae to no")
+            print("change card state to no")
 
         #3
          if ((pos[0] > 406 and pos[0] < 459) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(3)
-            print("change card stae to yes")
+            print("change card state to yes")
          if ((pos[0] > 406 and pos[0] < 459) and (pos[1] > 174 and pos[1] < 228) ):
             excelfunc.Card_enable(3)
-            print("change card stae to no")
+            print("change card state to no")
         #4
          if ((pos[0] > 201 and pos[0] <270) and (pos[1] > 103 and pos[1] < 154) ):
             excelfunc.Card_enable(4)
@@ -272,7 +274,7 @@ while not done:
             screen_Num = ClickBack1()
          pos = False
     elif screen_Num == 2:
-      tempscreen=2
+      checkscreen(2)
       tester_image = pygame.image.load("items\TesterMain.png").convert()
       screen.blit(tester_image, [0, 0])
       if reportenable:
@@ -334,7 +336,7 @@ while not done:
            hash = ""
            username = ""
            password = ""
-      if subScreen_num==1: #guides28
+      if subScreen_num==1: #guides    28.2
          rules_image = pygame.image.load("items\Rules.png").convert()
          screen.blit(rules_image, [0, 0])
          if event.type == pygame.MOUSEBUTTONDOWN:
@@ -359,12 +361,12 @@ while not done:
          pos = pygame.mouse.get_pos()
          if (pos):
             print(pos)
-            # pull card executeNextCard
+            # pull card ########execute NextCard inside func of pygame############
             if ((pos[0] > 708 and pos[0] < 838) and (pos[1] > 537 and pos[1] < 571)):
               card_image= cardandcube.card()[0]
               cardnum = cardandcube.card()[1]
               cardenable=True
-            #pull cube
+            #pull cube  ##########cubeclicked###########
             if ((pos[0] > 400 and pos[0] < 595) and (pos[1] > 309 and pos[1] < 346)):
               cube_tuple= cardandcube.cube()
               cube_image=cube_tuple[0]
